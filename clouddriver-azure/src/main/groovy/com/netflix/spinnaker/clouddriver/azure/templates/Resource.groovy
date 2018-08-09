@@ -61,10 +61,14 @@ class PublicIpResource extends Resource{
   PublicIPProperties properties = new PublicIPProperties()
 
   PublicIpResource() {
+    def currentTime = System.currentTimeMillis()
     apiVersion = "[variables('apiVersion')]"
     name = "[variables('publicIPAddressName')]"
     type = "Microsoft.Network/publicIPAddresses"
     location = "[parameters('location')]"
+    tags = [:]
+    tags.appName = name
+    tags.createdTime = currentTime.toString()
   }
 }
 
